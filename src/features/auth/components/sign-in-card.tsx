@@ -5,8 +5,10 @@ import { FaGithub } from "react-icons/fa"
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { DottedSeparator } from "@/components/dotted-separator";
+
 import { Button } from "@/components/ui/button";
+import { loginSchema } from "../schema";
+import { DottedSeparator } from "@/components/dotted-separator";
 import {
     Card,
     CardContent,
@@ -23,23 +25,22 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import Link from "next/link";
+import { useLogin } from "../api/use-login";
 
-const formSchema = z.object({
-    email: z.email(),
-    password: z.string().min(1, "Required"),
-});
 
 export const SignInCard = () => {
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
+    const { mutate } = useLogin();
+
+    const form = useForm<z.infer<typeof loginSchema>>({
+        resolver: zodResolver(loginSchema),
         defaultValues: {
             email: "",
             password: "",
         },
     });
 
-    const onSubmit = (values: z.infer<typeof formSchema>) => {
-        console.log({ values });
+    const onSubmit = (values: z.infer<typeof loginSchema>) => {
+        mutate({ json: values });
     };
 
     return (
