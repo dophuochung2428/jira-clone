@@ -13,11 +13,11 @@ import {
 import { DottedSeparator } from "@/components/dotted-separator";
 
 import { useLogout } from "../api/use-logout";
-import { userCurrent } from "../api/usr-current";
+import { useCurrent } from "../api/usr-current";
 import { Loader, LogOut } from "lucide-react";
 
 export const UserButton = () => {
-    const { data: user, isLoading } = userCurrent();
+    const { data: user, isLoading } = useCurrent();
     const { mutate: logout } = useLogout();
 
     if (isLoading) {
