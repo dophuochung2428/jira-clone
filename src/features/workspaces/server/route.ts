@@ -8,6 +8,16 @@ import { createWorkspaceSchema } from "../schema";
 import { sessionMiddleware } from "@/lib/session-middleware";
 
 const app = new Hono()
+    .get("/", sessionMiddleware, async (c) => {
+        const databases = c.get("databases");
+
+        const workspace = await databases.listDocuments(
+            DATABASE_ID,
+            WORKSPACES_ID
+        );
+
+        return c.json({ data: workspace });
+    })
     .post(
         "/",
         zValidator("form", createWorkspaceSchema),
