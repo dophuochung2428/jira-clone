@@ -2,7 +2,7 @@
 
 import z from "zod";
 import Image from "next/image";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -131,7 +131,16 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }: EditWorkspaceForm
         }
     };
 
-    const fullInviteLink = `${window.location.origin}/workspaces/${initialValues.$id}/join/${initialValues.inviteCode}`;
+    const [fullInviteLink, setFullInviteLink] = useState("");
+
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            setFullInviteLink(
+                `${window.location.origin}/workspaces/${initialValues.$id}/join/${initialValues.inviteCode}`
+            );
+        }
+    }, [initialValues.$id, initialValues.inviteCode]);
+
 
     const handleCopyInviteLink = () => {
         navigator.clipboard.writeText(fullInviteLink)
