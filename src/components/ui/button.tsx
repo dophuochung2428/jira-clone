@@ -19,7 +19,7 @@ const buttonVariants = cva(
         ghost:
           "border-transparent shadow-none hover:bg-accent hover:text-accent-foreground",
         muted: "bg-neutral-200 text-neutral-600 hover:bg-neutral-200/80",
-        teritrary: "bg-blue-100 text-blue-600 border-transparent hover:bg-blue-200 shadow-none",
+        tertiary: "bg-blue-100 text-blue-600 border-transparent hover:bg-blue-200 shadow-none",
       },
       size: {
         default: "h-10 px-4 py-2 has-[>svg]:px-3",
