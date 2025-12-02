@@ -45,7 +45,7 @@ export const CreateProjectForm = ({ onCancel }: CreateProjectFormProps) => {
 
     const inputRef = useRef<HTMLInputElement>(null);
 
-    const formSchema = createProjectSchema.omit({workspaceId: true});
+    const formSchema = createProjectSchema.omit({ workspaceId: true });
     type formValues = z.infer<typeof formSchema>;
 
     const form = useForm<formValues>({
@@ -63,11 +63,11 @@ export const CreateProjectForm = ({ onCancel }: CreateProjectFormProps) => {
         };
 
         mutate({ form: finalValue }, {
-            onSuccess: () => {
+            onSuccess: ({ data }) => {
                 form.reset();
                 onCancel?.();
                 setTimeout(() => {
-                    // TODO: redirect to project sceen
+                    router.push(`/workspaces/${workspaceId}/projects/${data.$id}`)
                 }, 300);
             }
         });
