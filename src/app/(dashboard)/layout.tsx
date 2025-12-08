@@ -4,6 +4,7 @@ import { NuqsAdapter } from "nuqs/adapters/next";
 import { CreateProjectModal } from "@/features/projects/components/create-project-modal";
 import { CreateWorkspaceModal } from "@/features/workspaces/components/create-workspace-modal";
 import { CreateTaskModal } from "@/features/tasks/components/create-task-modal";
+import { EditTaskModal } from "@/features/tasks/components/edit-task-modal";
 
 interface DashboardLayoutProps {
     children: React.ReactNode;
@@ -16,6 +17,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                 <CreateWorkspaceModal />
                 <CreateProjectModal />
                 <CreateTaskModal />
+                <EditTaskModal />
                 <div className="flex w-full h-full">
                     <div className="fixed left-0 top-0 hidden lg:block lg:w-[264px] h-full overflow-y-auto">
                         <Sidebar />
