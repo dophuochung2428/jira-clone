@@ -2,7 +2,7 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, MoreVertical } from "lucide-react"
-import { Task } from "../types";
+import { Task, TaskWithRelations } from "../types";
 import { Button } from "@/components/ui/button";
 import { ProjectAvatar } from "@/features/projects/components/project-avatar";
 import { MemberAvatar } from "@/features/members/components/member-avatar";
@@ -11,7 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { snakeCaseToTitileCase } from "@/lib/utils";
 import { TaskActions } from "./task-actions";
 
-export const columns: ColumnDef<Task>[] = [
+export const columns: ColumnDef<TaskWithRelations>[] = [
     {
         accessorKey: "name",
         header: ({ column }) => {
@@ -51,10 +51,10 @@ export const columns: ColumnDef<Task>[] = [
                 <div className="flex items-center gap-x-2 text-sm font-medium">
                     <ProjectAvatar
                         className="size-6"
-                        name={project.name}
-                        image={project.imageUrl}
+                        name={project?.name ?? "No project"}
+                        image={project?.imageUrl}
                     />
-                    <p className="line-clamp-1">{project.name}</p>
+                    <p className="line-clamp-1">{project?.name ?? "No project"}</p>
                 </div>
             )
         }
@@ -80,9 +80,9 @@ export const columns: ColumnDef<Task>[] = [
                     <MemberAvatar
                         className="size-6"
                         fallbackClassName="text-xs"
-                        name={assignee.name}
+                        name={assignee?.name ?? "Unknown"}
                     />
-                    <p className="line-clamp-1">{assignee.name}</p>
+                    <p className="line-clamp-1">{assignee?.name ?? "Unknown"}</p>
                 </div>
             )
         }
@@ -103,7 +103,7 @@ export const columns: ColumnDef<Task>[] = [
         cell: ({ row }) => {
             const dueDate = row.original.dueDate;
 
-            return <TaskDate value={dueDate} />
+            return <TaskDate value={dueDate ?? ""} />
         }
     },
     {
