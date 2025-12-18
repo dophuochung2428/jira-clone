@@ -1,11 +1,19 @@
 import { Models } from "node-appwrite";
 
 export enum MemberRole {
-    ADMIN = "ADMIN",
-    MEMBER = "MEMBER"
-};
+  ADMIN = "ADMIN",
+  MEMBER = "MEMBER",
+}
 
 export type Assignee = Models.Document & {
-    name: string;
-    email: string;
-}
+  name: string;
+  email: string;
+};
+
+export type Member = Models.Document & {
+  workspaceId: string;
+  userId: string;
+  role: MemberRole;
+  name: string;
+  email: string;
+};
