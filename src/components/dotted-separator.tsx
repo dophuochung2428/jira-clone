@@ -6,7 +6,7 @@ interface DottedSeparatorProps {
     height?: string;
     dotSize?: string;
     gapSize?: string;
-    direction?: "horizontal" | "vertial";
+    direction?: "horizontal" | "vertical";
 };
 
 export const DottedSeparator = ({
