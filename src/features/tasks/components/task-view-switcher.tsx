@@ -22,6 +22,7 @@ import { TaskStatus, TaskWithRelations } from "../types";
 import { useCallback } from "react";
 import { useBuldUpdateTasks } from "../api/use-bulk-update-tasks";
 import { DataCalendar } from "./data-calendar";
+import { DataKanbanPramatic } from "./pra-data-kanban";
 
 interface TaskViewSwitcherProps {
     hideProjectFilter?: boolean;
@@ -91,6 +92,12 @@ export const TaskViewSwitcher = ({
                         >
                             Calendar
                         </TabsTrigger>
+                        <TabsTrigger
+                            className="h-8 w-full lg:w-auto"
+                            value="pramatic"
+                        >
+                            PraDrDr
+                        </TabsTrigger>
                     </TabsList>
                     <Button
                         onClick={open}
@@ -118,6 +125,9 @@ export const TaskViewSwitcher = ({
                         </TabsContent>
                         <TabsContent value="calendar" className="mt-0 h-full pd-4">
                             <DataCalendar data={tasks?.documents ?? []} />
+                        </TabsContent>
+                        <TabsContent value="pramatic" className="mt-0 h-full pd-4">
+                            <DataKanbanPramatic data={tasks?.documents ?? []} />
                         </TabsContent>
                     </>
                 )}

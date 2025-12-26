@@ -1,0 +1,22 @@
+/* column.css */
+
+.column {
+  width: 250px;
+  background-color: var(--ds-elevation-surface-sunken);
+  border-radius: var(--ds-radius-xlarge);
+  transition: background var(--ds-duration-medium) var(--ds-ease-in-out);
+  position: relative;
+}
+
+.columnIdle {
+  cursor: grab;
+}
+
+.columnCardOver {
+  background-color: var(--ds-color-background-selected-hovered);
+}
+
+/* Fix drag preview bug */
+.columnPreview {
+  isolation: isolate;
+}
