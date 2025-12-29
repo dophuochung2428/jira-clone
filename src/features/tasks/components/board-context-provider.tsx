@@ -59,12 +59,7 @@ export const BoardContextProvider = (
 
             const [moved] = next.splice(startIndex, 1);
 
-            const adjustedFinishIndex =
-                startIndex < finishIndex
-                    ? finishIndex - 1
-                    : finishIndex;
-
-            next.splice(adjustedFinishIndex, 0, moved);
+            next.splice(finishIndex, 0, moved);
             return next;
         });
     };

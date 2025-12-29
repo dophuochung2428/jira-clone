@@ -1,17 +1,24 @@
 "use client";
 
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useBoardContext } from "./board-context";
 import { Column } from "./column";
 import { monitorForElements } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
-import { ColumnGap } from "./column-gap";
+
+import {
+    extractClosestEdge,
+} from "@atlaskit/pragmatic-drag-and-drop-hitbox/closest-edge";
+
+import {
+    getReorderDestinationIndex,
+} from "@atlaskit/pragmatic-drag-and-drop-hitbox/util/get-reorder-destination-index";
+
+import { DropIndicator } from
+    "@atlaskit/pragmatic-drag-and-drop-react-drop-indicator/box";
+
 
 type ColumnDragData = {
     type: "COLUMN";
-    index: number;
-};
-type ColumnGapDropData = {
-    type: "COLUMN_GAP";
     index: number;
 };
 
@@ -27,11 +34,20 @@ export default function Board() {
                 const target = location.current.dropTargets[0];
                 if (!target) return;
 
-                const targetData = target.data as ColumnGapDropData
+                const targetData = target.data as ColumnDragData;
+
+                const edge = extractClosestEdge(targetData);
+
+                let destinationIndex = getReorderDestinationIndex({
+                    startIndex: sourceData.index,
+                    indexOfTarget: targetData.index,
+                    closestEdgeOfTarget: edge,
+                    axis: "horizontal",
+                });
 
                 reorderColumn({
                     startIndex: sourceData.index,
-                    finishIndex: targetData.index,
+                    finishIndex: destinationIndex,
                 });
             },
         });
@@ -41,13 +57,8 @@ export default function Board() {
     return (
         <div className="flex flex-row gap-x-2 h-[480px]">
             {columns.map((column, index) => (
-                <Fragment key={column.id}>
-                    <ColumnGap index={index} />
-
-                    <Column column={column} index={index} />
-                </Fragment>
+                <Column key={column.id} column={column} index={index} />
             ))}
-            <ColumnGap index={columns.length} />
         </div>
     );
 }
