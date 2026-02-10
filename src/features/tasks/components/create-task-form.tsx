@@ -72,14 +72,28 @@ export const CreateTaskForm = ({ onCancel, projectOptions, memberOptions }: Crea
 
 
 
-    const onSubmit = (values: FormValues) => {
-        mutate({ json: { ...values, workspaceId } }, {
-            onSuccess: () => {
-                form.reset();
-                onCancel?.();
+    const onSubmit = async (values: FormValues) => {
+        const tasks = Array.from({ length: 1000 }, (_, i) => ({
+            assigneeId: "692dd1ec0018d0893d68",
+            description: "",
+            dueDate: Date.now(),
+            name: `Task-${i + 1}`,
+            projectId: "692f30f70028ec4891d3",
+            status: "TODO",
+            workspaceId: "692dd1eb003e3e72b103",
+        }));
 
-            }
-        });
+        await Promise.all(tasks.map(t =>
+            mutate({ json: { ...values, workspaceId } }, {
+                onSuccess: () => {
+                    // form.reset();
+                    // onCancel?.();
+
+                }
+            })
+        ))
+
+
     };
 
     return (

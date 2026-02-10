@@ -1,11 +1,25 @@
 import { createContext, useContext } from "react";
-import { BoardColumn } from "../types"
+import { BoardColumn, TaskStatus } from "../types"
 
 export type BoardContextValue = {
     columns: BoardColumn[];
+
     reorderColumn: (args: {
         startIndex: number;
         finishIndex: number;
+    }) => void;
+
+    reorderCard: (args: {
+        columnId: TaskStatus;
+        startIndex: number;
+        finishIndex: number;
+    }) => void;
+
+    moveCard: (args: {
+        taskId: string;
+        fromColumnId: string;
+        toColumnId: string;
+        toIndex: number;
     }) => void;
 };
 

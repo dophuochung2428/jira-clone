@@ -17,7 +17,7 @@ import { DropIndicator } from
     "@atlaskit/pragmatic-drag-and-drop-react-drop-indicator/box";
 
 
-type ColumnDragData = {
+export type ColumnDragData = {
     type: "COLUMN";
     index: number;
 };
@@ -38,6 +38,8 @@ export default function Board() {
 
                 const edge = extractClosestEdge(targetData);
 
+                console.log(edge);
+
                 let destinationIndex = getReorderDestinationIndex({
                     startIndex: sourceData.index,
                     indexOfTarget: targetData.index,
@@ -55,7 +57,7 @@ export default function Board() {
 
 
     return (
-        <div className="flex flex-row gap-x-2 h-[480px]">
+        <div className="flex flex-row h-[480px]">
             {columns.map((column, index) => (
                 <Column key={column.id} column={column} index={index} />
             ))}

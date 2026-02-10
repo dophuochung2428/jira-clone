@@ -168,7 +168,11 @@ export const DataKanban = ({
                                     <div
                                         {...provided.droppableProps}
                                         ref={provided.innerRef}
-                                        className="min-h-[200px] py-1.5"
+                                        className="
+                                            min-h-[200px] 
+                                            py-1.5
+                                            max-h-[calc(100vh-220px)]
+                                            overflow-y-auto"
                                     >
                                         {tasks[board].map((task, index) => (
                                             <Draggable
