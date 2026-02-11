@@ -8,6 +8,12 @@ built to practice UI workflows and modern React architecture.
 The application replicates core Jira features such as workspaces, projects, tasks, and kanban-style workflow management.  
 It is built as a personal project to demonstrate frontend development skills.
 
+This project focuses on practicing:
+
+- Component-based architecture
+- State management patterns
+- Drag & drop UX interactions
+
 ## Features
 
 - Responsive Kanban board UI
